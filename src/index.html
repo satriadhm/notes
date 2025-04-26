@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Notes App</h1>
+    <div class="theme-switcher">
+      <button id="theme-toggle" title="Toggle dark/light mode">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="notes-section">
+      <div class="notes-actions">
+        <div class="search-container">
+          <input type="text" id="search-notes" placeholder="Search notes..." />
+          <button id="search-button">🔍</button>
+        </div>
+        <div class="view-options">
+          <button id="view-all" class="active">All</button>
+          <button id="view-archived">Archived</button>
+        </div>
+      </div>
+      
+      <div class="notes-grid" id="notes-container">
+        <!-- Notes will be dynamically inserted here using note-item custom element -->
+      </div>
+    </section>
+
+    <section class="add-note-section">
+      <h2>Add New Note</h2>
+      <form id="add-note-form">
+        <div class="form-group">
+          <label for="note-title">Title</label>
+          <input 
+            type="text" 
+            id="note-title" 
+            required 
+            minlength="3" 
+            maxlength="50"
+            placeholder="Enter note title..."
+          />
+          <div class="validation-message" id="title-validation"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="note-body">Content</label>
+          <textarea 
+            id="note-body" 
+            required 
+            minlength="5"
+            rows="6" 
+            placeholder="Enter note content..."
+          ></textarea>
+          <div class="validation-message" id="body-validation"></div>
+        </div>
+
+        <div class="remaining-chars" id="body-remaining">
+          <span id="chars-count">200</span> characters remaining
+        </div>
+
+        <button type="submit" id="save-button" disabled>Add Note</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Notes App</p>
+  </footer>
+
+  <custom-modal id="confirm-modal">
+    <h2 slot="title">Confirm Delete</h2>
+    <p slot="content">Are you sure you want to delete this note? This action cannot be undone.</p>
+    <div slot="actions">
+      <button id="modal-cancel-btn">Cancel</button>
+      <button id="modal-confirm-btn">Delete</button>
+    </div>
+  </custom-modal>
+
+  <custom-toast id="notification-toast"></custom-toast>
+
+  <script src="custom-elements.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
