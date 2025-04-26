@@ -25,6 +25,11 @@
   --modal-overlay: rgba(0, 0, 0, 0.7);
 }
 
+/* Add smooth transition for theme change (Optional Criteria 3) */
+.theme-transition {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -136,6 +141,22 @@ note-item {
   margin-bottom: 1rem;
 }
 
+/* Add animations for note items (Optional Criteria 3) */
+.note-animate {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .empty-state {
   text-align: center;
   padding: 2rem;
@@ -219,6 +240,7 @@ note-item {
 
 #save-button:hover:not([disabled]) {
   background-color: var(--primary-dark);
+  transform: translateY(-2px); /* Add slight lift effect on hover */
 }
 
 #save-button:disabled {
@@ -249,6 +271,7 @@ custom-modal[open] {
   width: 100%;
   height: 100%;
   z-index: 1000;
+  animation: fade-in 0.3s ease; /* Add animation to modal */
 }
 
 .modal-overlay {
@@ -270,6 +293,18 @@ custom-modal[open] {
   border-radius: 8px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
   z-index: 1001;
+  animation: slide-in 0.3s ease; /* Add slide-in animation */
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-title {
@@ -300,10 +335,18 @@ custom-modal[open] {
   color: var(--text-color);
 }
 
+#modal-cancel-btn:hover {
+  background-color: #f5f5f5;
+}
+
 #modal-confirm-btn {
   background-color: var(--secondary-color);
   border: none;
   color: white;
+}
+
+#modal-confirm-btn:hover {
+  background-color: #c0392b;
 }
 
 /* Toast styles */
@@ -336,10 +379,10 @@ custom-toast.warning {
 
 custom-toast.show {
   display: block;
-  animation: slide-in 0.3s ease forwards;
+  animation: slide-in-right 0.3s ease forwards;
 }
 
-@keyframes slide-in {
+@keyframes slide-in-right {
   from {
     transform: translateX(100%);
     opacity: 0;

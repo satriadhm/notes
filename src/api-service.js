@@ -16,6 +16,8 @@ class NotesAPI {
       return responseJson.data;
     } catch (error) {
       console.error('Error getting notes:', error);
+      // Utilize Browser API for error feedback (Optional Criteria 2)
+      alert(`Failed to get notes: ${error.message}`);
       return [];
     }
   }
@@ -32,6 +34,8 @@ class NotesAPI {
       return responseJson.data;
     } catch (error) {
       console.error('Error getting archived notes:', error);
+      // Utilize Browser API for error feedback
+      alert(`Failed to get archived notes: ${error.message}`);
       return [];
     }
   }
@@ -48,6 +52,7 @@ class NotesAPI {
       return responseJson.data;
     } catch (error) {
       console.error(`Error getting note with id ${id}:`, error);
+      alert(`Failed to get note details: ${error.message}`);
       return null;
     }
   }
@@ -71,6 +76,7 @@ class NotesAPI {
       return responseJson.data;
     } catch (error) {
       console.error('Error creating note:', error);
+      alert(`Failed to create note: ${error.message}`);
       throw error;
     }
   }
@@ -90,6 +96,7 @@ class NotesAPI {
       return true;
     } catch (error) {
       console.error(`Error archiving note with id ${id}:`, error);
+      alert(`Failed to archive note: ${error.message}`);
       throw error;
     }
   }
@@ -109,6 +116,7 @@ class NotesAPI {
       return true;
     } catch (error) {
       console.error(`Error unarchiving note with id ${id}:`, error);
+      alert(`Failed to unarchive note: ${error.message}`);
       throw error;
     }
   }
@@ -128,6 +136,7 @@ class NotesAPI {
       return true;
     } catch (error) {
       console.error(`Error deleting note with id ${id}:`, error);
+      alert(`Failed to delete note: ${error.message}`);
       throw error;
     }
   }

@@ -2,6 +2,7 @@
 import NotesAPI from './api-service';
 import './loading-indicator';
 import './custom-elements';
+import './styles.css'; // Make sure styles are properly imported
 
 // DOM Elements
 const notesContainer = document.getElementById('notes-container');
@@ -148,6 +149,12 @@ function toggleTheme() {
   const isDarkTheme = document.body.classList.toggle('dark-theme');
   themeToggleButton.textContent = isDarkTheme ? '☀️' : '🌙';
   localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+
+  // Add animation class for smooth transition (Optional Criteria 3)
+  document.body.classList.add('theme-transition');
+  setTimeout(() => {
+    document.body.classList.remove('theme-transition');
+  }, 500);
 
   // Show toast notification
   showNotification(isDarkTheme ? 'Dark theme activated' : 'Light theme activated');
@@ -355,6 +362,9 @@ function renderNotes() {
       noteItem.setAttribute('archived', '');
     }
 
+    // Add animation class (Optional Criteria 3)
+    noteItem.classList.add('note-animate');
+
     // Add to container
     notesContainer.appendChild(noteItem);
   });
@@ -364,6 +374,17 @@ function renderNotes() {
 function showNotification(message, type = 'info') {
   notificationToast.show(message, type);
 }
+
+// Add network error handling (Optional Criteria 2)
+window.addEventListener('offline', () => {
+  showNotification('You are currently offline. Some features may not work properly.', 'warning');
+});
+
+window.addEventListener('online', () => {
+  showNotification('You are back online!', 'success');
+  // Reload notes when connection is restored
+  loadNotesFromAPI();
+});
 
 // Export for webpack
 export default { initializeApp };
